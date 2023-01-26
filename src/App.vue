@@ -6,6 +6,7 @@
   <result-screen v-if="endGameStatus && StatusScreen"
   :TimeTotal="settings.totalTime"
   @SendReGame="setStatus"/>
+  <shared-screen/>
 </template>
 <script>
 import {ref} from 'vue';
@@ -13,12 +14,14 @@ import MainScreen from './components/MainScreen.vue';
 import PlayScreen from './components/PlayScreen.vue';
 import {shuffled} from './assets/until/processing.js';
 import ResultScreen from './components/ResultScreen.vue';
+import SharedScreen from './components/SharedScreen.vue';
 export default {
   name: 'App',
   components:{
     MainScreen,
     PlayScreen,
-    ResultScreen
+    ResultScreen,
+    SharedScreen
   },
   
   setup(){
@@ -32,8 +35,8 @@ export default {
     const endGameStatus = ref(false);
     function setStatus()
     {
-      this.StatusScreen = false;
-      this.endGameStatus = false;
+      StatusScreen.value = false;
+      endGameStatus.value = false;
     }
     function getTotalFromMain(setting)
     {
@@ -55,7 +58,7 @@ export default {
       setTimeout(() => {
         this.settings.totalTime = endAt - this.settings.startAt;
         endGameStatus.value = status
-      }, 1500);
+      }, 2500);
     }
     return{
       settings,
