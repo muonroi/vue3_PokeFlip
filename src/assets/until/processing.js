@@ -1,0 +1,1 @@
+export const shuffled = (x) => x.sort(() => Math.random() - 0.5);
